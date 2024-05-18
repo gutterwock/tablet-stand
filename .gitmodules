@@ -1,0 +1,3 @@
+[submodule "scadjs-utils"]
+	path = scadjs-utils
+	url = git@github.com:gutterwock/scadjs-utils.git
