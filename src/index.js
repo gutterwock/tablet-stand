@@ -1,12 +1,26 @@
 const { writeToFile } = require("../scadjs-utils/src/utils");
-const Cube = require("../scadjs-utils/src/primitives/cube");
+const {
+	leftArm,
+  rightArm
+} = require("./calcs");
+const RoundedQuad = require("../scadjs-utils/src/composites/roundedQuad");
 
-const cube = new Cube({
-	dimensions: [1, 1, 1],
-});
-cube.render();
+const renderLeft = true;
+const renderRight = true;
 
-const solids = [cube];
+const leftSolids = renderLeft ? leftArm.map((props) => {
+	const roundedQuad = new RoundedQuad(props);
+	roundedQuad.render();
+	return roundedQuad;
+}) : [];
+
+const rightSolids = renderRight ? rightArm.map((props) => {
+	const roundedQuad = new RoundedQuad(props);
+	roundedQuad.render();
+	return roundedQuad;
+}) : [];
+
+const solids = [...leftSolids, ...rightSolids];
 
 const outputFile = "./stand.scad";
 
